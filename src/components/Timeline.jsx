@@ -2,7 +2,10 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, MapPin, Heart, Sparkles, Coffee, Sun, Star } from 'lucide-react';
 
-const baseUrl = import.meta.env.BASE_URL || './';
+import heroImg from '../assets/hero.png';
+import coffeeImg from '../assets/coffee.png';
+import sunsetImg from '../assets/sunset.png';
+import proposalImg from '../assets/proposal.png';
 
 const milestones = [
   {
@@ -11,7 +14,7 @@ const milestones = [
     date: 'February 14, 2024',
     location: 'Mumbai, India',
     icon: Sparkles,
-    image: `${baseUrl}images/hero.png`,
+    image: heroImg,
     description: 'The exact day two souls connected. A simple conversation turned into hours of endless laughter, revealing a bond deeper than words could describe.',
     tag: 'Chapter 1',
   },
@@ -21,7 +24,7 @@ const milestones = [
     date: 'March 10, 2024',
     location: 'Cozy Corner Café',
     icon: Coffee,
-    image: `${baseUrl}images/coffee.png`,
+    image: coffeeImg,
     description: 'Our first official coffee date. The aroma of roasted espresso, sweet giggles across the wooden table, and the moment Aryan realized Hiya was his dream come true.',
     tag: 'Chapter 2',
   },
@@ -31,7 +34,7 @@ const milestones = [
     date: 'October 25, 2024',
     location: 'Marine Sunset Beach',
     icon: Sun,
-    image: `${baseUrl}images/sunset.png`,
+    image: sunsetImg,
     description: 'Walking beside the crashing ocean waves while the sky turned into shades of violet and crimson gold. Time stood completely still for Aryan and Hiya.',
     tag: 'Chapter 3',
   },
@@ -41,7 +44,7 @@ const milestones = [
     date: 'January 01, 2025',
     location: 'Under Starry Canopy',
     icon: Star,
-    image: `${baseUrl}images/proposal.png`,
+    image: proposalImg,
     description: 'A magical proposal illuminated by soft fairy lights. "Will you be my forever?" — A resounding "Yes!" that sealed two hearts into one shared eternity.',
     tag: 'Chapter 4',
   },

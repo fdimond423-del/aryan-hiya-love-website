@@ -2,31 +2,34 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Image as ImageIcon, X } from 'lucide-react';
 
-const baseUrl = import.meta.env.BASE_URL || './';
+import heroImg from '../assets/hero.png';
+import coffeeImg from '../assets/coffee.png';
+import sunsetImg from '../assets/sunset.png';
+import proposalImg from '../assets/proposal.png';
 
 const galleryPhotos = [
   {
     id: 1,
     title: 'Starry Night Serenade',
-    src: `${baseUrl}images/hero.png`,
+    src: heroImg,
     caption: 'Under the twinkling lights of a million stars, holding each other close.',
   },
   {
     id: 2,
     title: 'Cozy Coffee Date',
-    src: `${baseUrl}images/coffee.png`,
+    src: coffeeImg,
     caption: 'Warm espresso cups, sweet laughter, and stolen glances.',
   },
   {
     id: 3,
     title: 'Crimson Sunset Walk',
-    src: `${baseUrl}images/sunset.png`,
+    src: sunsetImg,
     caption: 'Golden beach shore, gentle sea waves, and endless warmth.',
   },
   {
     id: 4,
     title: 'Fairytale Proposal',
-    src: `${baseUrl}images/proposal.png`,
+    src: proposalImg,
     caption: 'The moment two promises became one shared forever.',
   },
 ];

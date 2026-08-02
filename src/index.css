@@ -131,17 +131,20 @@ body {
   border-color: var(--primary-rose);
 }
 
-/* Hide scrollbar for horizontal tab container */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+.mobile-menu-toggle {
+  display: none !important;
 }
 
 /* Mobile responsive styles */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
+  .desktop-tabs-container {
+    display: none !important;
+  }
+
+  .mobile-menu-toggle {
+    display: flex !important;
+  }
+
   .glass-panel {
     padding: 16px !important;
     border-radius: 16px !important;
@@ -150,10 +153,6 @@ body {
   .btn-primary, .btn-secondary {
     padding: 10px 16px !important;
     font-size: 0.82rem !important;
-  }
-
-  .hidden-mobile {
-    display: none !important;
   }
 }
 

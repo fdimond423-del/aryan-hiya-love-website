@@ -1,35 +1,33 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Image as ImageIcon, Heart, X, Maximize2, Sparkles } from 'lucide-react';
+import { Image as ImageIcon, X } from 'lucide-react';
+
+const baseUrl = import.meta.env.BASE_URL || './';
 
 const galleryPhotos = [
   {
     id: 1,
     title: 'Starry Night Serenade',
-    src: '/images/hero.png',
+    src: `${baseUrl}images/hero.png`,
     caption: 'Under the twinkling lights of a million stars, holding each other close.',
-    span: 'col-span-2',
   },
   {
     id: 2,
     title: 'Cozy Coffee Date',
-    src: '/images/coffee.png',
+    src: `${baseUrl}images/coffee.png`,
     caption: 'Warm espresso cups, sweet laughter, and stolen glances.',
-    span: 'col-span-1',
   },
   {
     id: 3,
     title: 'Crimson Sunset Walk',
-    src: '/images/sunset.png',
+    src: `${baseUrl}images/sunset.png`,
     caption: 'Golden beach shore, gentle sea waves, and endless warmth.',
-    span: 'col-span-1',
   },
   {
     id: 4,
     title: 'Fairytale Proposal',
-    src: '/images/proposal.png',
+    src: `${baseUrl}images/proposal.png`,
     caption: 'The moment two promises became one shared forever.',
-    span: 'col-span-2',
   },
 ];
 
@@ -40,56 +38,55 @@ const Gallery = () => {
     <section
       id="gallery"
       style={{
-        padding: '100px 24px',
+        padding: '24px',
         position: 'relative',
         zIndex: 2,
-        maxWidth: '1200px',
+        maxWidth: '1100px',
         margin: '0 auto',
+        width: '100%',
       }}
     >
-      <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-        <div className="glass-pill" style={{ marginBottom: '16px' }}>
+      <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+        <div className="glass-pill" style={{ marginBottom: '12px' }}>
           <ImageIcon size={14} color="#f7d070" />
           <span style={{ fontSize: '0.85rem', color: '#ffd1dc', letterSpacing: '1px', textTransform: 'uppercase' }}>
             Captured Memories
           </span>
         </div>
 
-        <h2 className="font-serif text-gradient" style={{ fontSize: 'clamp(2.5rem, 5vw, 3.8rem)', marginBottom: '16px' }}>
+        <h2 className="font-serif text-gradient" style={{ fontSize: 'clamp(2.2rem, 4vw, 3.4rem)', marginBottom: '10px' }}>
           Romantic Photo Gallery
         </h2>
-        <p style={{ color: '#c4a9b6', fontSize: '1.1rem', maxWidth: '550px', margin: '0 auto' }}>
-          A visual journey through the sweetest moments captured in the lives of Aryan & Hiya.
+        <p style={{ color: '#c4a9b6', fontSize: '1rem', maxWidth: '550px', margin: '0 auto' }}>
+          A visual journey through the sweetest moments captured in the lives of Aryan Soni & Hiya.
         </p>
       </div>
 
-      {/* Photo Grid */}
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-          gap: '24px',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+          gap: '20px',
         }}
       >
         {galleryPhotos.map((photo, index) => (
           <motion.div
             key={photo.id}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: index * 0.1 }}
-            whileHover={{ y: -8 }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.4, delay: index * 0.08 }}
+            whileHover={{ y: -6 }}
             onClick={() => setSelectedPhoto(photo)}
             className="glass-panel"
             style={{
               overflow: 'hidden',
               cursor: 'pointer',
               position: 'relative',
-              borderRadius: '24px',
-              padding: '10px',
+              borderRadius: '20px',
+              padding: '8px',
             }}
           >
-            <div style={{ position: 'relative', width: '100%', aspectRatio: '4/3', borderRadius: '18px', overflow: 'hidden' }}>
+            <div style={{ position: 'relative', width: '100%', aspectRatio: '4/3', borderRadius: '14px', overflow: 'hidden' }}>
               <img
                 src={photo.src}
                 alt={photo.title}
@@ -97,30 +94,14 @@ const Gallery = () => {
                   width: '100%',
                   height: '100%',
                   objectFit: 'cover',
-                  transition: 'transform 0.5s ease',
                 }}
               />
-
-              <div
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  background: 'linear-gradient(to top, rgba(13,6,10,0.85) 0%, transparent 60%)',
-                  opacity: 0,
-                  transition: 'opacity 0.3s ease',
-                  display: 'flex',
-                  alignItems: 'flex-end',
-                  padding: '20px',
-                }}
-                className="gallery-hover-overlay"
-              >
-                <div>
-                  <h4 className="font-serif" style={{ fontSize: '1.4rem', color: '#fff' }}>
-                    {photo.title}
-                  </h4>
-                  <p style={{ fontSize: '0.85rem', color: '#ffd1dc' }}>{photo.caption}</p>
-                </div>
-              </div>
+            </div>
+            <div style={{ padding: '8px 4px' }}>
+              <h4 className="font-serif" style={{ fontSize: '1.1rem', color: '#fff' }}>
+                {photo.title}
+              </h4>
+              <p style={{ fontSize: '0.78rem', color: '#ffd1dc' }}>{photo.caption}</p>
             </div>
           </motion.div>
         ))}
@@ -153,9 +134,9 @@ const Gallery = () => {
               onClick={(e) => e.stopPropagation()}
               className="glass-panel"
               style={{
-                maxWidth: '800px',
+                maxWidth: '750px',
                 width: '100%',
-                padding: '20px',
+                padding: '16px',
                 position: 'relative',
                 background: 'rgba(20, 8, 17, 0.95)',
                 border: '1px solid rgba(255,42,109,0.3)',
@@ -165,8 +146,8 @@ const Gallery = () => {
                 onClick={() => setSelectedPhoto(null)}
                 style={{
                   position: 'absolute',
-                  top: '16px',
-                  right: '16px',
+                  top: '12px',
+                  right: '12px',
                   background: 'rgba(255,255,255,0.1)',
                   border: 'none',
                   color: '#fff',
@@ -183,19 +164,19 @@ const Gallery = () => {
                 <X size={20} />
               </button>
 
-              <div style={{ borderRadius: '16px', overflow: 'hidden', marginBottom: '16px' }}>
+              <div style={{ borderRadius: '12px', overflow: 'hidden', marginBottom: '12px' }}>
                 <img
                   src={selectedPhoto.src}
                   alt={selectedPhoto.title}
-                  style={{ width: '100%', maxHeight: '550px', objectFit: 'cover' }}
+                  style={{ width: '100%', maxHeight: '480px', objectFit: 'cover' }}
                 />
               </div>
 
-              <div style={{ padding: '8px 12px' }}>
-                <h3 className="font-serif text-gradient" style={{ fontSize: '1.8rem', marginBottom: '6px' }}>
+              <div style={{ padding: '4px 8px' }}>
+                <h3 className="font-serif text-gradient" style={{ fontSize: '1.6rem', marginBottom: '4px' }}>
                   {selectedPhoto.title}
                 </h3>
-                <p style={{ color: '#c4a9b6', fontSize: '1rem' }}>{selectedPhoto.caption}</p>
+                <p style={{ color: '#c4a9b6', fontSize: '0.95rem' }}>{selectedPhoto.caption}</p>
               </div>
             </motion.div>
           </motion.div>

@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Volume2, VolumeX, Music } from 'lucide-react';
 
+const baseUrl = import.meta.env.BASE_URL || './';
+
 const MusicPlayer = ({ isMuted, toggleAudio }) => {
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -43,7 +45,7 @@ const MusicPlayer = ({ isMuted, toggleAudio }) => {
       }}
     >
       {/* HTML5 Audio element loading "Die With A Smile" custom MP3 file */}
-      <audio ref={audioRef} src="/audio/love_song.mp3" loop preload="auto" />
+      <audio ref={audioRef} src={`${baseUrl}audio/love_song.mp3`} loop preload="auto" />
 
       <button
         onClick={toggleAudio}

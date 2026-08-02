@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Heart, Sparkles, Flame, ChevronRight } from 'lucide-react';
+import { Heart, Sparkles, Flame } from 'lucide-react';
 
 const Hero = () => {
   const startDate = new Date('2024-02-14T00:00:00');
   const [timeTogether, setTimeTogether] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  const baseUrl = import.meta.env.BASE_URL || './';
 
   useEffect(() => {
     const updateCounter = () => {
@@ -164,7 +165,7 @@ const Hero = () => {
             }}
           >
             <img
-              src="/images/hero.png"
+              src={`${baseUrl}images/hero.png`}
               alt="Aryan Soni & Hiya"
               style={{
                 width: '100%',

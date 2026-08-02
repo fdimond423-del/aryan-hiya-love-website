@@ -27,7 +27,7 @@ const pages = [
 function App() {
   const [loading, setLoading] = useState(true);
   const [activePage, setActivePage] = useState(0);
-  const [direction, setDirection] = useState(1); // 1 = forward, -1 = backward
+  const [direction, setDirection] = useState(1);
   const [isMuted, setIsMuted] = useState(true);
 
   const toggleAudio = () => setIsMuted((prev) => !prev);
@@ -58,7 +58,6 @@ function App() {
 
   const ActiveComponent = pages[activePage].component;
 
-  // 3D Book Page Flip Animation Variants
   const pageVariants = {
     initial: (dir) => ({
       rotateY: dir > 0 ? 80 : -80,
@@ -72,7 +71,7 @@ function App() {
       scale: 1,
       transformOrigin: 'center center',
       transition: {
-        duration: 0.7,
+        duration: 0.6,
         ease: [0.25, 1, 0.5, 1],
       },
     },
@@ -82,7 +81,7 @@ function App() {
       scale: 0.95,
       transformOrigin: dir > 0 ? 'left center' : 'right center',
       transition: {
-        duration: 0.6,
+        duration: 0.5,
         ease: [0.5, 0, 0.75, 0],
       },
     }),
@@ -101,26 +100,24 @@ function App() {
         flexDirection: 'column',
       }}
     >
-      {/* Preloader */}
       <AnimatePresence>
         {loading && <RomanticLoader onComplete={() => setLoading(false)} />}
       </AnimatePresence>
 
-      {/* Background Interactive Particle Canvas */}
       <HeroCanvas />
 
-      {/* Top Glassmorphic Navigation Bar */}
+      {/* Top Glassmorphic Navigation Bar - Mobile Responsive */}
       <header
         style={{
           position: 'absolute',
-          top: '16px',
+          top: '12px',
           left: '50%',
           transform: 'translateX(-50%)',
-          width: '94%',
+          width: '96%',
           maxWidth: '1240px',
           zIndex: 100,
-          padding: '10px 24px',
-          background: 'rgba(20, 8, 17, 0.88)',
+          padding: '8px 16px',
+          background: 'rgba(20, 8, 17, 0.9)',
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
           border: '1px solid rgba(255, 42, 109, 0.35)',
@@ -128,47 +125,48 @@ function App() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
+          gap: '8px',
           boxShadow: '0 15px 35px rgba(0,0,0,0.6), 0 0 25px rgba(255,42,109,0.25)',
         }}
       >
-        {/* Brand Logo & Made By Credit */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        {/* Brand Logo */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
           <div
             style={{
-              width: '36px',
-              height: '36px',
+              width: '32px',
+              height: '32px',
               borderRadius: '50%',
               background: 'linear-gradient(135deg, #ff2a6d, #e63956)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              boxShadow: '0 0 15px rgba(255, 42, 109, 0.6)',
+              boxShadow: '0 0 12px rgba(255, 42, 109, 0.6)',
             }}
           >
-            <Heart size={20} color="#fff" fill="#fff" />
+            <Heart size={16} color="#fff" fill="#fff" />
           </div>
           <div>
-            <div className="font-serif" style={{ fontSize: '1.3rem', fontWeight: '700', lineHeight: 1.1 }}>
-              <span style={{ color: '#fff' }}>Aryan Soni</span>
-              <span style={{ color: '#ff2a6d', margin: '0 4px' }}>❤️</span>
+            <div className="font-serif" style={{ fontSize: '1.1rem', fontWeight: '700', lineHeight: 1.1, whiteSpace: 'nowrap' }}>
+              <span style={{ color: '#fff' }}>Aryan</span>
+              <span style={{ color: '#ff2a6d', margin: '0 3px' }}>❤️</span>
               <span style={{ color: '#f7d070' }}>Hiya</span>
             </div>
-            <span style={{ fontSize: '0.7rem', color: '#ffd1dc' }}>
-              Made by <strong style={{ color: '#f7d070' }}>Aryan Soni</strong>
-            </span>
           </div>
         </div>
 
-        {/* Book Page Selector Tabs */}
+        {/* Scrollable Tab Selector Pills on Mobile */}
         <div
+          className="no-scrollbar"
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '6px',
+            gap: '4px',
             background: 'rgba(255,255,255,0.06)',
-            padding: '4px 6px',
+            padding: '3px 4px',
             borderRadius: '9999px',
             border: '1px solid rgba(255,255,255,0.1)',
+            overflowX: 'auto',
+            maxWidth: '100%',
           }}
         >
           {pages.map((p, idx) => {
@@ -183,64 +181,50 @@ function App() {
                   background: isActive ? 'linear-gradient(135deg, #ff2a6d, #e63956)' : 'transparent',
                   color: isActive ? '#fff' : '#c4a9b6',
                   border: 'none',
-                  padding: '7px 14px',
+                  padding: '6px 12px',
                   borderRadius: '9999px',
                   cursor: 'pointer',
-                  fontSize: '0.82rem',
+                  fontSize: '0.78rem',
                   fontWeight: '600',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '6px',
+                  gap: '4px',
+                  whiteSpace: 'nowrap',
                   transition: 'all 0.3s ease',
-                  boxShadow: isActive ? '0 0 15px rgba(255, 42, 109, 0.5)' : 'none',
+                  boxShadow: isActive ? '0 0 12px rgba(255, 42, 109, 0.5)' : 'none',
                 }}
               >
-                <Icon size={14} fill={isActive ? '#fff' : 'none'} />
+                <Icon size={12} fill={isActive ? '#fff' : 'none'} />
                 <span>{p.label}</span>
               </button>
             );
           })}
         </div>
 
-        {/* Action Controls */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <button
-            onClick={toggleAudio}
-            style={{
-              background: 'rgba(255, 255, 255, 0.08)',
-              border: '1px solid rgba(255, 42, 109, 0.3)',
-              color: isMuted ? '#c4a9b6' : '#ff2a6d',
-              padding: '10px',
-              borderRadius: '50%',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} className="animate-pulse-glow" />}
-          </button>
-
-          <button onClick={triggerLoveBurst} className="btn-primary" style={{ padding: '8px 16px', fontSize: '0.82rem' }}>
-            <Sparkles size={16} /> Send Heart ❤️
-          </button>
-        </div>
+        {/* Send Heart Action */}
+        <button
+          onClick={triggerLoveBurst}
+          className="btn-primary"
+          style={{ padding: '6px 12px', fontSize: '0.78rem', flexShrink: 0 }}
+        >
+          <Sparkles size={14} /> <span className="hidden-mobile">Send</span> ❤️
+        </button>
       </header>
 
-      {/* 3D Book Stage Container */}
+      {/* Main Content Area */}
       <main
         style={{
           flex: 1,
           width: '100%',
-          height: 'calc(100vh - 80px)',
+          height: 'calc(100vh - 75px)',
           overflow: 'hidden',
           position: 'relative',
-          paddingTop: '85px',
+          paddingTop: '70px',
           paddingBottom: '20px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          perspective: '1500px', // Enforces 3D Depth perspective
+          perspective: '1500px',
         }}
       >
         <AnimatePresence custom={direction} mode="wait">
@@ -254,7 +238,7 @@ function App() {
             style={{
               width: '100%',
               height: '100%',
-              maxHeight: 'calc(100vh - 100px)',
+              maxHeight: 'calc(100vh - 90px)',
               overflowY: 'auto',
               display: 'flex',
               alignItems: 'center',
@@ -268,12 +252,12 @@ function App() {
         </AnimatePresence>
       </main>
 
-      {/* Left Page Turn Button */}
+      {/* Left Navigation Arrow */}
       <button
         onClick={handlePrevPage}
         style={{
           position: 'absolute',
-          left: '20px',
+          left: '10px',
           top: '50%',
           transform: 'translateY(-50%)',
           zIndex: 90,
@@ -281,27 +265,26 @@ function App() {
           backdropFilter: 'blur(12px)',
           border: '1px solid rgba(255, 42, 109, 0.4)',
           color: '#fff',
-          width: '48px',
-          height: '48px',
+          width: '40px',
+          height: '40px',
           borderRadius: '50%',
           cursor: 'pointer',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          boxShadow: '0 10px 25px rgba(0,0,0,0.6)',
-          transition: 'all 0.3s ease',
+          boxShadow: '0 8px 20px rgba(0,0,0,0.6)',
         }}
-        title="Turn Page Back"
+        title="Previous Page"
       >
-        <ChevronLeft size={26} />
+        <ChevronLeft size={22} />
       </button>
 
-      {/* Right Page Turn Button */}
+      {/* Right Navigation Arrow */}
       <button
         onClick={handleNextPage}
         style={{
           position: 'absolute',
-          right: '20px',
+          right: '10px',
           top: '50%',
           transform: 'translateY(-50%)',
           zIndex: 90,
@@ -309,47 +292,46 @@ function App() {
           backdropFilter: 'blur(12px)',
           border: '1px solid rgba(255, 42, 109, 0.4)',
           color: '#fff',
-          width: '48px',
-          height: '48px',
+          width: '40px',
+          height: '40px',
           borderRadius: '50%',
           cursor: 'pointer',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          boxShadow: '0 10px 25px rgba(0,0,0,0.6)',
-          transition: 'all 0.3s ease',
+          boxShadow: '0 8px 20px rgba(0,0,0,0.6)',
         }}
-        title="Turn Page Forward"
+        title="Next Page"
       >
-        <ChevronRight size={26} />
+        <ChevronRight size={22} />
       </button>
 
-      {/* Bottom Audio Player */}
+      {/* Floating Audio Player */}
       <MusicPlayer isMuted={isMuted} toggleAudio={toggleAudio} />
 
-      {/* Made By Aryan Soni Footer Credit & Page Number */}
+      {/* Footer Branding Pill */}
       <div
         style={{
           position: 'absolute',
-          bottom: '16px',
-          left: '24px',
-          zIndex: 90,
+          bottom: '12px',
+          left: '16px',
+          zIndex: 85,
           background: 'rgba(20, 8, 17, 0.85)',
           backdropFilter: 'blur(12px)',
           border: '1px solid rgba(255, 42, 109, 0.3)',
           borderRadius: '999px',
-          padding: '6px 16px',
-          fontSize: '0.78rem',
+          padding: '4px 12px',
+          fontSize: '0.72rem',
           color: '#ffd1dc',
           display: 'flex',
           alignItems: 'center',
-          gap: '8px',
+          gap: '6px',
         }}
       >
-        <Heart size={14} color="#ff2a6d" fill="#ff2a6d" />
-        <span>Made with ❤️ by <strong style={{ color: '#f7d070' }}>Aryan Soni</strong> for Hiya</span>
-        <span style={{ color: '#f7d070', borderLeft: '1px solid rgba(255,255,255,0.2)', paddingLeft: '8px' }}>
-          Page {activePage + 1} of {pages.length}
+        <Heart size={12} color="#ff2a6d" fill="#ff2a6d" />
+        <span>Made by <strong style={{ color: '#f7d070' }}>Aryan Soni</strong></span>
+        <span style={{ color: '#f7d070', borderLeft: '1px solid rgba(255,255,255,0.2)', paddingLeft: '6px' }}>
+          {activePage + 1}/{pages.length}
         </span>
       </div>
     </div>

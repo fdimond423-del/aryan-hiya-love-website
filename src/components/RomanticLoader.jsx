@@ -1,85 +1,91 @@
 import React, { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Heart, Sparkles, BookOpen } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Heart, Sparkles, BookOpen, Music } from 'lucide-react';
 
 const RomanticLoader = ({ onComplete }) => {
   const [progress, setProgress] = useState(0);
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(timer);
-          setTimeout(onComplete, 400);
+          setIsReady(true);
           return 100;
         }
         return prev + 5;
       });
-    }, 60);
+    }, 40);
 
     return () => clearInterval(timer);
-  }, [onComplete]);
+  }, []);
+
+  const handleStartBook = () => {
+    onComplete();
+  };
 
   return (
     <motion.div
       initial={{ opacity: 1 }}
-      exit={{ opacity: 0, transition: { duration: 0.8 } }}
+      exit={{ opacity: 0, transition: { duration: 0.6 } }}
+      onClick={handleStartBook}
       style={{
         position: 'fixed',
         inset: 0,
         zIndex: 1000,
         backgroundColor: '#0d060a',
-        backgroundImage: 'radial-gradient(circle at 50% 50%, rgba(255, 42, 109, 0.2), transparent 70%)',
+        backgroundImage: 'radial-gradient(circle at 50% 50%, rgba(255, 42, 109, 0.25), transparent 70%)',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         padding: '24px',
+        cursor: 'pointer',
       }}
     >
-      {/* 3D Opening Heart Book Animation */}
       <motion.div
         animate={{ scale: [1, 1.1, 1], rotateY: [0, 15, 0] }}
-        transition={{ repeat: Infinity, duration: 2.5, ease: 'easeInOut' }}
+        transition={{ repeat: Infinity, duration: 2.2, ease: 'easeInOut' }}
         style={{
-          width: '90px',
-          height: '90px',
+          width: '80px',
+          height: '80px',
           borderRadius: '50%',
           background: 'linear-gradient(135deg, #ff2a6d, #e63956)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           boxShadow: '0 0 40px rgba(255, 42, 109, 0.8), 0 0 20px rgba(247, 208, 112, 0.5)',
-          marginBottom: '28px',
+          marginBottom: '24px',
           border: '3px solid #f7d070',
         }}
       >
-        <BookOpen size={44} color="#fff" />
+        <BookOpen size={40} color="#fff" />
       </motion.div>
 
       <motion.h2
         className="font-serif text-gradient"
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
-        style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', marginBottom: '8px', textAlign: 'center' }}
+        style={{ fontSize: 'clamp(1.8rem, 5vw, 2.8rem)', marginBottom: '8px', textAlign: 'center' }}
       >
         Aryan Soni ❤️ Hiya
       </motion.h2>
 
-      <p style={{ color: '#ffd1dc', fontSize: '1rem', marginBottom: '24px', textAlign: 'center' }}>
-        Opening The Eternal Book of Love...
+      <p style={{ color: '#ffd1dc', fontSize: '0.95rem', marginBottom: '24px', textAlign: 'center' }}>
+        The Eternal Book of Love
       </p>
 
       {/* Progress Bar Container */}
       <div
         style={{
-          width: '260px',
+          width: '240px',
           height: '6px',
           background: 'rgba(255, 255, 255, 0.1)',
           borderRadius: '999px',
           overflow: 'hidden',
           position: 'relative',
-          marginBottom: '16px',
+          marginBottom: '20px',
           border: '1px solid rgba(255, 42, 109, 0.3)',
         }}
       >
@@ -94,13 +100,26 @@ const RomanticLoader = ({ onComplete }) => {
         />
       </div>
 
-      <span style={{ fontSize: '0.85rem', color: '#c4a9b6' }}>{progress}% Loaded</span>
+      {isReady ? (
+        <motion.button
+          initial={{ scale: 0.9 }}
+          animate={{ scale: [1, 1.05, 1] }}
+          transition={{ repeat: Infinity, duration: 1.5 }}
+          onClick={handleStartBook}
+          className="btn-primary"
+          style={{ padding: '12px 28px', fontSize: '0.95rem', marginTop: '8px' }}
+        >
+          <Music size={18} /> Tap to Open Book & Play Song 🎵
+        </motion.button>
+      ) : (
+        <span style={{ fontSize: '0.85rem', color: '#c4a9b6' }}>{progress}% Loaded</span>
+      )}
 
       <div
         style={{
           position: 'absolute',
-          bottom: '30px',
-          fontSize: '0.8rem',
+          bottom: '24px',
+          fontSize: '0.78rem',
           color: '#f7d070',
           display: 'flex',
           alignItems: 'center',
